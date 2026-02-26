@@ -1,0 +1,14 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/endings.rpy", line 664: '(' was never closed
+    show text Text(\"{cps=35}> INFINIT-0 OS RECUERDA.{/cps}{image=ctc_blink}\", color="#003333", font="fonts/vt323.ttf", size=26) at blink_anim
+                  ^
+
+File "game/script.rpy", line 88: '(' was never closed
+    show text Text(\"{cps=35}> Igual vamos a jugar.{/cps}{image=ctc_blink}\", color="#cc0000", font="fonts/vt323.ttf", size=32) at glitch_anim
+                  ^
+
+Ren'Py Version: Ren'Py 8.5.2.26010301
+Thu Feb 26 06:15:19 2026

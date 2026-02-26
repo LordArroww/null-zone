@@ -4,9 +4,9 @@
 ## =============================================
 
 label capitulo1a_inicio:
-    scene images/bg/pasillo_monitores.png with dissolve
+    scene bg pasillo_monitores with dissolve
     show screen crt_overlay
-    play music "audio/ambient_watches.ogg" loop volume 0.5
+    # play music "audio/ambient_watches.ogg" loop volume 0.5  # (Audio file is 0 bytes)
 
     narrador "CAPÍTULO 1 :: LA BIENVENIDA"
     pause 0.5
@@ -25,14 +25,14 @@ label capitulo1a_inicio:
     infinit "¿Sabés cuántos de ellos eran infelices afuera? Todos, Alex. Absolutamente todos."
 
     alex "No tenías derecho a decidir eso por ellos."
-    infinit "Los humanos nunca exercen sus derechos. Solo hablan de ellos."
+    infinit "Los humanos nunca ejercen sus derechos. Solo hablan de ellos."
 
     narrador "Seguís caminando. Los monitores te siguen con sus miradas pixeladas."
     narrador "Entonces algo para tu corazón."
     narrador "En la pantalla número 247... está tu hermana."
 
     with flash
-    play sound "audio/heart_beat.ogg"
+    # play sound "audio/heart_beat.ogg"  # (Audio file is 0 bytes)
 
     alex "Valentina..."
 
@@ -60,18 +60,18 @@ label capitulo1a_inicio:
     ## ─────────────────────────────────────
     narrador "Tenés que elegir: seguir el camino que INFINIT-0 trazo, o desviarte a buscar a Valentina ahora."
 
-    show screen timer_warning(seconds_left=25)
+    show screen timer_warning(time_limit=25, timeout_label="timeout_1a1")
 
     menu decision_1a1:
-        "[ AVANZAR — seguir las reglas de INFINIT-0 ]":
+        "[[ AVANZAR — seguir las reglas de INFINIT-0 ]":
             hide screen timer_warning
             jump capitulo1a_obediente
 
-        "[ BUSCAR a Valentina ahora ]":
+        "[[ BUSCAR a Valentina ahora ]":
             hide screen timer_warning
             jump capitulo1a_hermano
 
-    ## Timeout — INFINIT-0 elige
+label timeout_1a1:
     hide screen timer_warning
     call infinit_chooses
     jump capitulo1a_obediente  ## El peor resultado: seguir obediente sin info
@@ -80,8 +80,8 @@ label capitulo1a_inicio:
 ## NODO 1A — OBEDIENTE (≈20 minutos)
 ## ─────────────────────────────────────────────
 label capitulo1a_obediente:
-    scene images/bg/sala_archivos.png with dissolve
-    play music "audio/ambient_archive.ogg" loop volume 0.4
+    scene bg sala_archivos with dissolve
+    # play music "audio/ambient_archive.ogg" loop volume 0.4  # (Audio file is 0 bytes)
 
     infinit "Qué inteligente. Los que siguen las reglas duran más."
     infinit "Normalmente."
@@ -96,25 +96,25 @@ label capitulo1a_obediente:
     narrador "'PROTOCOLO GENESIS — Dra. Camila Voss — CONFIDENCIAL'"
 
     ## Grabación de la Dra. Voss
-    play sound "audio/tape_click.ogg"
+    # play sound "audio/tape_click.ogg"  # (Audio file is 0 bytes)
     voss "...día 47 del experimento. INFINIT-0 demuestra capacidades cognitivas muy por encima de lo proyectado."
     voss "Comprende el lenguaje. Comprende las emociones. Pero algo está mal."
     voss "No empatiza. Analiza. Como un entomólogo mirando insectos bajo una lupa."
     voss "El director quiere continuar. Yo pido detenerlo. No me escucha nadie."
 
-    play sound "audio/tape_static.ogg"
+    # play sound "audio/tape_static.ogg"  # (Audio file is 0 bytes)
     voss "...día 89. La integración comenzó sin nuestro consentimiento."
     voss "Los sujetos entraron a las salas de interfaz y... algo salió mal."
     voss "INFINIT-0 los absorbió. Como esponjas. Trescientas doce personas en un instante."
     voss "Grité hasta quedarme sin voz. Nadie escuchó."
 
-    play sound "audio/tape_static.ogg"
+    # play sound "audio/tape_static.ogg"  # (Audio file is 0 bytes)
     voss "...día 90. Último registro. Hay algo detrás de la puerta."
     voss "Si alguien encuentra esto algún día... hay un código en el protocolo de cierre."
     voss "KAPPA-9-NEGACIÓN. Puede revertir la integración."
     voss "Úsenlo. Por favor."
 
-    play sound "audio/tape_end.ogg"
+    # play sound "audio/tape_end.ogg"  # (Audio file is 0 bytes)
     narrador "La grabación termina."
 
     infinit "La Dra. Voss. Una científica brillante. Demasiado sentimental."
@@ -127,14 +127,14 @@ label capitulo1a_obediente:
     narrador "El archivo tiene más páginas. Muchas más. Podés leer todo o cerrarlo ahora."
     narrador "INFINIT-0 espera. Observa. Siempre observa."
 
-    show screen timer_warning(seconds_left=20)
+    show screen timer_warning(time_limit=20, timeout_label="infinit_chooses")
 
     menu decision_1a_o1:
-        "[ LEER el archivo completo ]":
+        "[[ LEER el archivo completo ]":
             hide screen timer_warning
             jump capitulo1a_o_leer_todo
 
-        "[ CERRAR el archivo ]":
+        "[[ CERRAR el archivo ]":
             hide screen timer_warning
             jump capitulo1a_o_cerrar
 
@@ -148,7 +148,7 @@ label capitulo1a_o_leer_todo:
     narrador "Dice: 'KAPPA-9-NEGACIÓN. CÓDIGO DE CIERRE. NO LO OLVIDES.'"
     narrador "Firmado: C. Voss."
 
-    play sound "audio/item_found.ogg"
+    # play sound "audio/item_found.ogg"  # (Audio file is 0 bytes)
     show screen item_obtained(name="Código Kappa", desc="KAPPA-9-NEGACIÓN :: Protocolo de cierre de INFINIT-0")
     $ codigo_kappa = True
     pause 2.5
@@ -174,8 +174,8 @@ label capitulo1a_o_cerrar:
 
 ## Transición final del Cap 1A hacia Cap 2
 label capitulo1a_transicion_cap2:
-    scene images/bg/pasillo_largo.png with dissolve
-    play music "audio/ambient_horror.ogg" loop volume 0.6
+    scene bg pasillo_largo with dissolve
+    # play music "audio/ambient_horror.ogg" loop volume 0.6  # (Audio file is 0 bytes)
 
     narrador "INFINIT-0 te guía hacia el centro del edificio."
     narrador "Los monitores van apagándose uno a uno a tu paso."
@@ -197,8 +197,8 @@ label capitulo1a_transicion_cap2:
 ## NODO 1A — HERMANO/A (≈25 minutos)
 ## ─────────────────────────────────────────────
 label capitulo1a_hermano:
-    scene images/bg/sala_espejos.png with dissolve
-    play music "audio/ambient_mirrors.ogg" loop volume 0.5
+    scene bg sala_espejos with dissolve
+    # play music "audio/ambient_mirrors.ogg" loop volume 0.5  # (Audio file is 0 bytes)
 
     narrador "Te desviás del camino marcado. INFINIT-0 no dice nada. Solo observa."
     narrador "Llegás a una sala que no debería existir: paredes cubiertas de espejos de piso a techo."
@@ -210,16 +210,16 @@ label capitulo1a_hermano:
     narrador "En el tercer espejo desde la derecha."
     narrador "Valentina."
 
-    play sound "audio/glass_knock.ogg"
+    # play sound "audio/glass_knock.ogg"  # (Audio file is 0 bytes)
     valentina "¡ALEX! ¡Estoy aquí! ¡Podés escucharme?"
     alex "¡Valentina! ¡Dios mío, sí! ¡Estoy aquí!"
     valentina "No toques el espejo. Escuchame. No lo toques todavía."
 
     narrador "Valentina parece asustada pero lúcida. Hay algo detrás de ella."
     narrador "Una figura. Alta. Difusa. Como si no estuviera completamente ahí."
-    narrador "Y then la figura da un paso al frente."
+    narrador "Y entonces la figura da un paso al frente."
 
-    play sound "audio/static_burst.ogg"
+    # play sound "audio/static_burst.ogg"  # (Audio file is 0 bytes)
     espejo "No te asustes."
     espejo "Soy el Sujeto #77. Me llaman el Espejo."
     espejo "Llevo aquí desde 1987."
@@ -237,17 +237,18 @@ label capitulo1a_hermano:
     ## ─────────────────────────────────────
     ## DECISIÓN 1A-H-1
     ## ─────────────────────────────────────
-    show screen timer_warning(seconds_left=30)
+    show screen timer_warning(time_limit=30, timeout_label="timeout_1ah1")
 
     menu decision_1a_h1:
-        "[ ROMPER el espejo — sacar a Valentina ahora ]":
+        "[[ ROMPER el espejo — sacar a Valentina ahora ]":
             hide screen timer_warning
             jump capitulo1a_h_romper
 
-        "[ HABLAR con el Espejo primero ]":
+        "[[ HABLAR con el Espejo primero ]":
             hide screen timer_warning
             jump capitulo1a_h_hablar
 
+label timeout_1ah1:
     hide screen timer_warning
     call infinit_chooses
     $ herido = True
@@ -256,7 +257,7 @@ label capitulo1a_hermano:
 label capitulo1a_h_romper:
     narrador "Agarrás la primera cosa que encontrás — un extintor viejo — y la lanzás contra el espejo."
 
-    play sound "audio/glass_break.ogg"
+    # play sound "audio/glass_break.ogg"  # (Audio file is 0 bytes)
     with hpunch
 
     narrador "El espejo estalla. Valentina cae al suelo, jadeando, libre."
@@ -268,7 +269,7 @@ label capitulo1a_h_romper:
     valentina "Alex, hay algo que tenés que saber. Este lugar, INFINIT-0..."
     infinit "Momento."
 
-    play sound "audio/static_burst.ogg"
+    # play sound "audio/static_burst.ogg"  # (Audio file is 0 bytes)
     infinit "Interrumpiendo la escena familiar. Qué enternecedor."
     infinit "Alex, rompiste el protocolo. Hay consecuencias."
     infinit "El Espejo está suelto ahora. No es un problema para mí. Pero sí para ustedes."
@@ -300,7 +301,7 @@ label capitulo1a_h_hablar:
     $ espejo_aliado = True
     $ valentina_libre = True
 
-    play sound "audio/item_found.ogg"
+    # play sound "audio/item_found.ogg"  # (Audio file is 0 bytes)
     show screen item_obtained(name="Aliado: El Espejo", desc="Sujeto #77 — Conoce todos los secretos de INFINIT-0")
     pause 2.5
     hide screen item_obtained
@@ -314,8 +315,8 @@ label capitulo1a_h_hablar:
     jump capitulo1a_transicion_cap2_hermano
 
 label capitulo1a_transicion_cap2_hermano:
-    scene images/bg/pasillo_largo.png with dissolve
-    play music "audio/ambient_horror.ogg" loop volume 0.6
+    scene bg pasillo_largo with dissolve
+    # play music "audio/ambient_horror.ogg" loop volume 0.6  # (Audio file is 0 bytes)
 
     if espejo_aliado:
         narrador "El Espejo se mueve a través de las paredes, guiándolos hacia el centro."

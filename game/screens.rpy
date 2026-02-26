@@ -9,9 +9,8 @@
 screen crt_overlay():
     zorder 100
     add "#000000" alpha 0.08
-    # Scanlines simuladas con barras semitransparentes
-    for y in range(0, 1080, 4):
-        add Solid("#000000") xpos 0 ypos y xsize 1920 ysize 2 alpha 0.15
+    # Scanlines — overlay oscuro sutil
+    add Solid("#000000") alpha 0.06
 
 ## ─────────────────────────────────────────────
 ## PANTALLA DE TERMINAL INTERACTIVA
@@ -48,6 +47,11 @@ screen terminal_screen(prompt="", history=[]):
                     font "fonts/vt323.ttf"
                     size 28
                     at blink_anim
+
+## ─────────────────────────────────────────────
+## TRANSICIONES PERSONALIZADAS
+## ─────────────────────────────────────────────
+define flash = Fade(0.1, 0.0, 0.1, color="#ffffff")
 
 ## ─────────────────────────────────────────────
 ## ANIMACIONES
@@ -93,7 +97,7 @@ screen main_menu():
     tag menu
     style_prefix "main_menu"
 
-    add "images/bg/menu_bg.png"
+    add "bg menu_bg"
     # CRT overlay
     add Solid("#0a0a0a") alpha 0.5
 
@@ -123,22 +127,22 @@ screen main_menu():
         yalign 0.65
         spacing 18
 
-        textbutton "[ NUEVA PARTIDA ]":
+        textbutton "[[ NUEVA PARTIDA ]":
             xalign 0.5
             action Start()
             style "main_menu_button"
 
-        textbutton "[ CONTINUAR ]":
+        textbutton "[[ CONTINUAR ]":
             xalign 0.5
             action ShowMenu("load")
             style "main_menu_button"
 
-        textbutton "[ OPCIONES ]":
+        textbutton "[[ OPCIONES ]":
             xalign 0.5
             action ShowMenu("preferences")
             style "main_menu_button"
 
-        textbutton "[ SALIR ]":
+        textbutton "[[ SALIR ]":
             xalign 0.5
             action Quit(confirm=not main_menu)
             style "main_menu_button"
@@ -170,8 +174,13 @@ style main_menu_button_text:
 ## ─────────────────────────────────────────────
 ## PANTALLA DE PAUSA DE TIEMPO LIMITADO
 ## ─────────────────────────────────────────────
-screen timer_warning(seconds_left):
+screen timer_warning(time_limit=30, timeout_label=None):
     zorder 150
+    default seconds_left = time_limit
+
+    # El temporizador real
+    timer 1.0 action If(seconds_left > 0, true=SetScreenVariable("seconds_left", seconds_left - 1), false=Return("timeout_ocurrido")) repeat True
+
     frame:
         background Solid("#cc000044")
         xalign 0.5
@@ -224,7 +233,8 @@ screen item_obtained(name, desc):
 # screen debug_hud():
 #     zorder 300
 #     vbox:
-#         xpos 10 ypos 10
+#         xpos 10
+#         ypos 10
 #         text "codigo_kappa: [codigo_kappa]" color "#ffffff" size 20
 #         text "espejo_aliado: [espejo_aliado]" color "#ffffff" size 20
 #         text "dante_aliado: [dante_aliado]" color "#ffffff" size 20

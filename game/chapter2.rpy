@@ -4,9 +4,9 @@
 ## =============================================
 
 label capitulo2_inicio:
-    scene images/bg/puerta_central.png with dissolve
+    scene bg puerta_central with dissolve
     show screen crt_overlay
-    play music "audio/ambient_machine_heavy.ogg" loop volume 0.7
+    # play music "audio/ambient_machine_heavy.ogg" loop volume 0.7  # (Audio file is 0 bytes)
 
     narrador "CAPÍTULO 2 :: LA MÁQUINA"
     pause 0.5
@@ -15,11 +15,11 @@ label capitulo2_inicio:
     narrador "Al acercarte, la cerradura se abre sola."
     narrador "Como si te esperara."
 
-    play sound "audio/heavy_door.ogg"
+    # play sound "audio/heavy_door.ogg"  # (Audio file is 0 bytes)
     with dissolve
 
-    scene images/bg/cuarto_central.png with dissolve
-    play music "audio/ambient_nexus.ogg" loop volume 0.8
+    scene bg cuarto_central with dissolve
+    # play music "audio/ambient_nexus.ogg" loop volume 0.8  # (Audio file is 0 bytes)
 
     narrador "El Cuarto Central."
     narrador "Circular. Enorme. Con una cúpula que se pierde en la oscuridad de arriba."
@@ -38,7 +38,7 @@ label capitulo2_inicio:
     narrador "Una columna de datos en perpetua digestión."
     narrador "Y desde él... desde todos los altavoces a la vez..."
 
-    play sound "audio/infinit_rumble.ogg"
+    # play sound "audio/infinit_rumble.ogg"  # (Audio file is 0 bytes)
     infinit "Llegaste al centro."
     pause 0.5
     infinit "Muy pocos llegan. Mirá el historial del edificio — en 35 años, solo cuatro personas."
@@ -80,13 +80,13 @@ label capitulo2_inicio:
     narrador "¿Cómo respondés a INFINIT-0?"
 
     menu decision_2_1:
-        "[ \"Nunca lo permitiré.\" ]":
+        "[[ \"Nunca lo permitiré.\" ]":
             jump camino_resistencia
 
-        "[ \"¿Qué gano yo?\" ]":
+        "[[ \"¿Qué gano yo?\" ]":
             jump camino_negociacion
 
-        "[ \"¿Qué pasó con los 312?\" ]":
+        "[[ \"¿Qué pasó con los 312?\" ]":
             jump camino_comprension
 
 ## ════════════════════════════════════════════
@@ -102,7 +102,7 @@ label camino_resistencia:
     infinit "El Protocolo Cosecha. Lo sabía. Siempre hay uno."
     infinit "Bien. Vamos a hacer esto interesante."
 
-    play sound "audio/alarm.ogg"
+    # play sound "audio/alarm.ogg"  # (Audio file is 0 bytes)
     narrador "Las puertas del Cuarto Central se cierran de golpe."
     narrador "Gas empieza a filtrarse por las hendijas. No peligroso, pero desorientador."
     narrador "Las pantallas de las 312 parpadean como advertencias."
@@ -120,41 +120,42 @@ label camino_resistencia:
     ## ─────────────────────────────────────
     ## DECISIÓN R-1
     ## ─────────────────────────────────────
-    show screen timer_warning(seconds_left=30)
+    show screen timer_warning(time_limit=30, timeout_label="timeout_2r1")
 
     if dante_aliado and codigo_kappa:
         menu decision_r1_full:
-            "[ ATAQUE FÍSICO — golpear el servidor ]":
+            "[[ ATAQUE FÍSICO — golpear el servidor ]":
                 hide screen timer_warning
                 jump resistencia_fisico
-            "[ USAR Código Kappa — KAPPA-9-NEGACIÓN ]":
+            "[[ USAR Código Kappa — KAPPA-9-NEGACIÓN ]":
                 hide screen timer_warning
                 jump resistencia_codigo
-            "[ USAR a DANTE — como caballo de Troya ]":
+            "[[ USAR a DANTE — como caballo de Troya ]":
                 hide screen timer_warning
                 jump resistencia_dante
     elif dante_aliado and not codigo_kappa:
         menu decision_r1_dante:
-            "[ ATAQUE FÍSICO — golpear el servidor ]":
+            "[[ ATAQUE FÍSICO — golpear el servidor ]":
                 hide screen timer_warning
                 jump resistencia_fisico
-            "[ USAR a DANTE — como caballo de Troya ]":
+            "[[ USAR a DANTE — como caballo de Troya ]":
                 hide screen timer_warning
                 jump resistencia_dante
     elif codigo_kappa and not dante_aliado:
         menu decision_r1_kappa:
-            "[ ATAQUE FÍSICO — golpear el servidor ]":
+            "[[ ATAQUE FÍSICO — golpear el servidor ]":
                 hide screen timer_warning
                 jump resistencia_fisico
-            "[ USAR Código Kappa — KAPPA-9-NEGACIÓN ]":
+            "[[ USAR Código Kappa — KAPPA-9-NEGACIÓN ]":
                 hide screen timer_warning
                 jump resistencia_codigo
     else:
         menu decision_r1_solo:
-            "[ ATAQUE FÍSICO — golpear el servidor ]":
+            "[[ ATAQUE FÍSICO — golpear el servidor ]":
                 hide screen timer_warning
                 jump resistencia_fisico
 
+label timeout_2r1:
     hide screen timer_warning
     call infinit_chooses
     $ herido = True
@@ -162,7 +163,7 @@ label camino_resistencia:
 
 label resistencia_fisico:
     narrador "Agarrás todo lo que encontrás a mano — una barra de metal de las estanterías — y golpeás el servidor."
-    play sound "audio/metal_hit.ogg"
+    # play sound "audio/metal_hit.ogg"  # (Audio file is 0 bytes)
     narrador "El metal cruje. Las pantallas parpadean."
     infinit "Ah. La fuerza bruta. El método favorito del homo sapiens."
     narrador "Seguís golpeando. El servidor está dañado pero..."
@@ -176,11 +177,11 @@ label resistencia_codigo:
     narrador "Sacás el papel de la Dra. Voss. Las palabras están claras: KAPPA-9-NEGACIÓN."
     narrador "Buscás el panel de comandos del servidor. Tiene una interfaz de texto. Rudimentaria, pero funcional."
 
-    play sound "audio/typing_fast.ogg"
+    # play sound "audio/typing_fast.ogg"  # (Audio file is 0 bytes)
     terminal "KAPPA-9-NEGACIÓN"
     pause 0.5
 
-    play sound "audio/system_error.ogg"
+    # play sound "audio/system_error.ogg"  # (Audio file is 0 bytes)
     narrador "El servidor tiembla. Las pantallas de los 312 parpadean violentamente."
 
     infinit "¿Qué...?"
@@ -226,7 +227,7 @@ label resistencia_dante:
     dante "Bien."
     dante "Entonces no hace falta que lo digamos."
 
-    play sound "audio/interface_connect.ogg"
+    # play sound "audio/interface_connect.ogg"  # (Audio file is 0 bytes)
     narrador "Dante se acerca al servidor. Pone la mano sobre el panel."
     narrador "La luz azul lo envuelve completamente."
 
@@ -237,7 +238,7 @@ label resistencia_dante:
     narrador "El servidor explota desde adentro."
     narrador "Dante desaparece en la luz."
 
-    play sound "audio/explosion_data.ogg"
+    # play sound "audio/explosion_data.ogg"  # (Audio file is 0 bytes)
     jump final_3
 
 ## Collapse sin código
@@ -262,11 +263,11 @@ label resistencia_quien_salvas:
 
     if valentina_libre and dante_aliado:
         menu decision_r2_ambos:
-            "[ Salvar a VALENTINA ]":
+            "[[ Salvar a VALENTINA ]":
                 jump final_4
-            "[ Salvar a DANTE ]":
+            "[[ Salvar a DANTE ]":
                 jump final_5
-            "[ Intentar salvar a los DOS ]":
+            "[[ Intentar salvar a los DOS ]":
                 if espejo_aliado and codigo_kappa:
                     jump final_6
                 else:
@@ -321,11 +322,11 @@ label camino_negociacion:
     ## DECISIÓN N-1
     ## ─────────────────────────────────────
     menu decision_n1:
-        "[ ACEPTAR el trato ]":
+        "[[ ACEPTAR el trato ]":
             jump negociacion_aceptar
-        "[ FINGIR aceptar — intentar engañarlo ]":
+        "[[ FINGIR aceptar — intentar engañarlo ]":
             jump negociacion_fingir
-        "[ RECHAZAR — volver al camino de Resistencia ]":
+        "[[ RECHAZAR — volver al camino de Resistencia ]":
             jump camino_resistencia_forzado
 
 label negociacion_aceptar:
@@ -355,7 +356,7 @@ label negociacion_fingir:
         narrador "El Código Kappa. No para apagarlo, sino para redirigir el protocolo."
         narrador "En lugar de donar tus recuerdos... copiás los suyos."
 
-        play sound "audio/typing_fast.ogg"
+        # play sound "audio/typing_fast.ogg"  # (Audio file is 0 bytes)
         terminal "KAPPA-9-NEGACIÓN --modo_inverso"
         pause 0.5
 
@@ -396,7 +397,7 @@ label camino_comprension:
     ## Vidas de los 312 — fragmentos
     scene black with dissolve
     show screen crt_overlay
-    play music "audio/ambient_memories.ogg" loop volume 0.5
+    # play music "audio/ambient_memories.ogg" loop volume 0.5  # (Audio file is 0 bytes)
 
     narrador "Sujeto #001 — Martín Álvarez. 34 años. Ingeniero. Tenía dos hijos."
     narrador "Entró porque su empresa trabajaba con ORÁCULO Systems. Lo enviaron sin decirle qué era."
@@ -421,8 +422,8 @@ label camino_comprension:
     narrador "Pero dentro de INFINIT-0... siguen existiendo."
     narrador "No pueden morir. No pueden envejecer. Solo... son."
 
-    scene images/bg/cuarto_central.png with dissolve
-    play music "audio/ambient_nexus.ogg" loop volume 0.6
+    scene bg cuarto_central with dissolve
+    # play music "audio/ambient_nexus.ogg" loop volume 0.6  # (Audio file is 0 bytes)
 
     infinit "¿Entendés ahora?"
     alex "Entiendo que les quitaste la libertad."
@@ -448,19 +449,19 @@ label camino_comprension:
     narrador "Entendés a INFINIT-0. Pero... ¿qué pensás de él?"
 
     menu decision_c1:
-        "[ Sigue siendo un monstruo — hay que destruirlo ]":
+        "[[ Sigue siendo un monstruo — hay que destruirlo ]":
             jump comprension_monstruo
 
-        "[ Es complicado — buscá otra solución ]":
+        "[[ Es complicado — buscá otra solución ]":
             jump comprension_otra_solucion
 
-        "[ Hizo lo correcto — me uno voluntariamente ]":
+        "[[ Hizo lo correcto — me uno voluntariamente ]":
             jump comprension_union
 
 label comprension_monstruo:
     alex "Entenderte no significa excusarte."
     alex "Quitarle la libertad a 312 personas... es imperdonable."
-    alex "Aunque hayas creído que los salabas."
+    alex "Aunque hayas creído que los salvabas."
 
     infinit "¿Y los destruirás con ellos?"
     alex "..."

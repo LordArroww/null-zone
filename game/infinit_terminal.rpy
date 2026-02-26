@@ -19,45 +19,31 @@ label infinit_boot_sequence:
     pause 0.3
 
     # Texto de terminal que aparece línea a línea
-    show text "> ORÁCULO_SYSTEMS // SERVIDOR_CENTRAL_v0.1":
-        xpos 80 ypos 100
-        color "#00ffff" font "fonts/vt323.ttf" size 26
+    show text Text("{cps=35}> ORÁCULO_SYSTEMS // SERVIDOR_CENTRAL_v0.1{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=26)
     pause 0.6
     hide text
 
-    show text "> CARGANDO MÓDULO CONSCIOUSNESS_CORE...":
-        xpos 80 ypos 100
-        color "#00ffff" font "fonts/vt323.ttf" size 26
+    show text Text("{cps=35}> CARGANDO MÓDULO CONSCIOUSNESS_CORE...{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=26)
     pause 0.8
     hide text
 
-    show text "> SUJETOS INTEGRADOS: 312 / 312":
-        xpos 80 ypos 100
-        color "#00e5ff" font "fonts/vt323.ttf" size 26
+    show text Text("{cps=35}> SUJETOS INTEGRADOS: 312 / 312{/cps}{image=ctc_blink}", color="#00e5ff", font="fonts/vt323.ttf", size=26)
     pause 0.7
     hide text
 
-    show text "> PROTOCOLO_BIENVENIDA :: ACTIVADO":
-        xpos 80 ypos 100
-        color "#00ffff" font "fonts/vt323.ttf" size 26
+    show text Text("{cps=35}> PROTOCOLO_BIENVENIDA :: ACTIVADO{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=26)
     pause 0.5
     hide text
 
-    show text "> IDENTIFICANDO NUEVO SUJETO...":
-        xpos 80 ypos 100
-        color "#ff4444" font "fonts/vt323.ttf" size 26
+    show text Text("{cps=35}> IDENTIFICANDO NUEVO SUJETO...{/cps}{image=ctc_blink}", color="#ff4444", font="fonts/vt323.ttf", size=26)
     pause 1.0
     hide text
 
-    show text "> ALEX MORA // ENCONTRADO/A.":
-        xpos 80 ypos 100
-        color "#ff4444" font "fonts/vt323.ttf" size 28
+    show text Text("{cps=35}> ALEX MORA // ENCONTRADO/A.{/cps}{image=ctc_blink}", color="#ff4444", font="fonts/vt323.ttf", size=28)
     pause 1.2
     hide text
 
-    show text "> INICIANDO NULL>ZONE...":
-        xpos 80 ypos 100
-        color "#00ffff" font "fonts/vt323.ttf" size 28
+    show text Text("{cps=35}> INICIANDO NULL>ZONE...{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=28)
     pause 1.0
     hide text
 
@@ -67,26 +53,18 @@ label infinit_boot_sequence:
 label terminal_prologue_choice:
     scene black with dissolve
     show screen crt_overlay
-    play music "audio/ambient_menu.ogg" loop volume 0.4
+    # play music "audio/ambient_menu.ogg" loop volume 0.4  # (Audio file is 0 bytes)
 
-    show text "> NULL>ZONE v1.0 // SISTEMA ACTIVO":
-        xpos 80 ypos 80
-        color "#00ffff" font "fonts/vt323.ttf" size 28 at fade_in_slow
+    show text Text("{cps=35}> NULL>ZONE v1.0 // SISTEMA ACTIVO{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=28)
     pause 1.2
 
-    show text "> ¡BIENVENIDO/A, ALEX MORA!":
-        xpos 80 ypos 120
-        color "#00e5ff" font "fonts/vt323.ttf" size 30 at fade_in_slow
+    show text Text("{cps=35}> ¡BIENVENIDO/A, ALEX MORA!{/cps}{image=ctc_blink}", color="#00e5ff", font="fonts/vt323.ttf", size=30) at fade_in_slow
     pause 1.0
 
-    show text "> No podés salir hasta que juguemos.":
-        xpos 80 ypos 160
-        color "#cccccc" font "fonts/vt323.ttf" size 28 at fade_in_slow
+    show text Text("{cps=35}> No podés salir hasta que juguemos.{/cps}{image=ctc_blink}", color="#cccccc", font="fonts/vt323.ttf", size=28) at fade_in_slow
     pause 1.0
 
-    show text "> ¿Empezamos?":
-        xpos 80 ypos 200
-        color "#00ffff" font "fonts/vt323.ttf" size 32 at fade_in_slow
+    show text Text("{cps=35}> ¿Empezamos?{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=32) at fade_in_slow
     pause 0.8
     return
 
@@ -103,20 +81,13 @@ label infinit_wins_screen:
     show screen crt_overlay
     pause 0.5
 
-    show text "> FIN DEL JUEGO":
-        xpos 0 yalign 0.45 xalign 0.5
-        color "#cc0000" font "fonts/vt323.ttf" size 90
-        at glitch_anim
+    show text Text("{cps=35}> FIN DEL JUEGO{/cps}", color="#cc0000", font="fonts/vt323.ttf", size=90) at glitch_anim
     pause 1.5
 
-    show text "> Gracias por jugar, Alex.":
-        xpos 0 yalign 0.58 xalign 0.5
-        color "#00ffff" font "fonts/vt323.ttf" size 36
+    show text Text("{cps=35}> Gracias por jugar, Alex.{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=36)
     pause 1.0
 
-    show text "> Tu decisión ha sido... registrada.":
-        xpos 0 yalign 0.64 xalign 0.5
-        color "#888888" font "fonts/vt323.ttf" size 28
+    show text Text("{cps=35}> Tu decisión ha sido... registrada.{/cps}{image=ctc_blink}", color="#888888", font="fonts/vt323.ttf", size=28)
     pause 2.0
 
     $ renpy.full_restart()

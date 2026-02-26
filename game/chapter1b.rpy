@@ -4,9 +4,9 @@
 ## =============================================
 
 label capitulo1b_inicio:
-    scene images/bg/pasillo_oscuro.png with dissolve
+    scene bg pasillo_oscuro with dissolve
     show screen crt_overlay
-    play music "audio/ambient_tense.ogg" loop volume 0.5
+    # play music "audio/ambient_tense.ogg" loop volume 0.5  # (Audio file is 0 bytes)
 
     narrador "CAPÍTULO 1 :: EL REBELDE"
     pause 0.5
@@ -25,8 +25,8 @@ label capitulo1b_inicio:
     narrador "Una sala de servidores. Filas de racks con equipos de los años 80."
     narrador "Cables. Muchos cables. Y un generador masivo pulsando en el centro."
 
-    scene images/bg/sala_servidores.png with dissolve
-    play music "audio/ambient_machine.ogg" loop volume 0.5
+    scene bg sala_servidores with dissolve
+    # play music "audio/ambient_machine.ogg" loop volume 0.5  # (Audio file is 0 bytes)
 
     alex "Si corto la energía... todo el sistema cae."
     narrador "El generador tiene una palanca de corte manual. Gruesa. Oxidada. Pero funcional."
@@ -39,17 +39,18 @@ label capitulo1b_inicio:
     ## ─────────────────────────────────────
     ## DECISIÓN 1B-1
     ## ─────────────────────────────────────
-    show screen timer_warning(seconds_left=25)
+    show screen timer_warning(time_limit=25, timeout_label="timeout_1b1")
 
     menu decision_1b1:
-        "[ CORTAR el generador ]":
+        "[[ CORTAR el generador ]":
             hide screen timer_warning
             jump capitulo1b_oscuridad
 
-        "[ NO cortar — buscar otra opción ]":
+        "[[ NO cortar — buscar otra opción ]":
             hide screen timer_warning
             jump capitulo1b_radio
 
+label timeout_1b1:
     hide screen timer_warning
     call infinit_chooses
     $ herido = True
@@ -61,11 +62,11 @@ label capitulo1b_inicio:
 label capitulo1b_oscuridad:
     narrador "Agarrás la palanca. La girás con ambas manos."
 
-    play sound "audio/generator_off.ogg"
+    # play sound "audio/generator_off.ogg"  # (Audio file is 0 bytes)
     with flash
 
     scene black with dissolve
-    play music "audio/ambient_dark.ogg" loop volume 0.7
+    # play music "audio/ambient_dark.ogg" loop volume 0.7  # (Audio file is 0 bytes)
 
     narrador "Oscuridad total."
     narrador "No podés ver nada."
@@ -73,7 +74,7 @@ label capitulo1b_oscuridad:
     narrador "Pasos."
     narrador "Muchos pasos."
 
-    play sound "audio/footsteps_many.ogg"
+    # play sound "audio/footsteps_many.ogg"  # (Audio file is 0 bytes)
     pause 1.5
 
     alex "¿Quién está ahí?"
@@ -84,7 +85,7 @@ label capitulo1b_oscuridad:
     alex "¿Dante?"
     narrador "Una voz. Familiar. Pero no del todo."
 
-    play sound "audio/static_burst.ogg"
+    # play sound "audio/static_burst.ogg"  # (Audio file is 0 bytes)
     dante_inf "Hola, Alex."
     pause 0.5
     dante_inf "Elegiste bien. O mal. Depende del punto de vista."
@@ -104,17 +105,18 @@ label capitulo1b_oscuridad:
     ## ─────────────────────────────────────
     ## DECISIÓN 1B-O-1
     ## ─────────────────────────────────────
-    show screen timer_warning(seconds_left=30)
+    show screen timer_warning(time_limit=30, timeout_label="timeout_1bo1")
 
     menu decision_1b_o1:
-        "[ TRATAR a Dante como tu amigo ]":
+        "[[ TRATAR a Dante como tu amigo ]":
             hide screen timer_warning
             jump capitulo1b_o_amigo
 
-        "[ TRATAR a Dante como una AMENAZA ]":
+        "[[ TRATAR a Dante como una AMENAZA ]":
             hide screen timer_warning
             jump capitulo1b_o_amenaza
 
+label timeout_1bo1:
     hide screen timer_warning
     call infinit_chooses
     $ herido = True
@@ -144,7 +146,7 @@ label capitulo1b_o_amigo:
     dante_inf "Seguís teniendo valor. Eso te llevarás."
 
     $ dante_aliado = True
-    play sound "audio/item_found.ogg"
+    # play sound "audio/item_found.ogg"  # (Audio file is 0 bytes)
     show screen item_obtained(name="Pista de Dante", desc="Puerto de acceso manual — Nivel B3 — debilita a INFINIT-0")
     pause 2.5
     hide screen item_obtained
@@ -157,7 +159,7 @@ label capitulo1b_o_amenaza:
     alex "Quédate alejado de mí."
 
     narrador "La figura se detiene. Y luego..."
-    play sound "audio/chase_start.ogg"
+    # play sound "audio/chase_start.ogg"  # (Audio file is 0 bytes)
 
     narrador "Corre hacia vos."
     narrador "En la oscuridad, no podés ver bien. Solo podés correr."
@@ -169,7 +171,7 @@ label capitulo1b_o_amenaza:
         $ herido = True
         narrador "Te golpeás la cabeza contra un rack de servidores. La sangre calienta tu frente."
 
-    play sound "audio/footsteps_stop.ogg"
+    # play sound "audio/footsteps_stop.ogg"  # (Audio file is 0 bytes)
     narrador "La persecución para de repente. Como si algo lo llamara."
 
     dante_inf "Esta vez te salvás."
@@ -193,13 +195,13 @@ label capitulo1b_radio:
     narrador "Veinte minutos de trabajo silencioso. INFINIT-0 no interfiere."
     infinit "Curioso. Un técnico/a improvisado/a."
 
-    play sound "audio/radio_static.ogg"
+    # play sound "audio/radio_static.ogg"  # (Audio file is 0 bytes)
     narrador "La radio cobra vida."
 
     alex "¿Hay alguien ahí? ¿Alguien puede escucharme?"
     pause 0.5
 
-    play sound "audio/radio_crack.ogg"
+    # play sound "audio/radio_crack.ogg"  # (Audio file is 0 bytes)
     sujeto01 "...Sí. Te escucho."
     pause 0.3
     sujeto01 "Pensé que nunca iba a escuchar otra voz humana."
@@ -221,17 +223,18 @@ label capitulo1b_radio:
     ## ─────────────────────────────────────
     ## DECISIÓN 1B-C-1
     ## ─────────────────────────────────────
-    show screen timer_warning(seconds_left=30)
+    show screen timer_warning(time_limit=30, timeout_label="timeout_1bc1")
 
     menu decision_1b_c1:
-        "[ CONFIAR en la voz del Sujeto #01 ]":
+        "[[ CONFIAR en la voz del Sujeto #01 ]":
             hide screen timer_warning
             jump capitulo1b_c_confiar
 
-        "[ NO confiar — seguir solo/a ]":
+        "[[ NO confiar — seguir solo/a ]":
             hide screen timer_warning
             jump capitulo1b_c_solo
 
+label timeout_1bc1:
     hide screen timer_warning
     call infinit_chooses
     jump capitulo1b_c_solo
@@ -243,7 +246,7 @@ label capitulo1b_c_confiar:
     sujeto01 "Lo estudié tanto como él me estudió a mí."
 
     $ sujeto01_confiado = True
-    play sound "audio/item_found.ogg"
+    # play sound "audio/item_found.ogg"  # (Audio file is 0 bytes)
     show screen item_obtained(name="Aliado: Sujeto #01", desc="Conoce los sistemas de INFINIT-0 desde adentro")
     pause 2.5
     hide screen item_obtained
@@ -275,8 +278,8 @@ label capitulo1b_c_solo:
 
 ## Transición final Cap 1B hacia Cap 2
 label capitulo1b_transicion_cap2:
-    scene images/bg/escalera_bajando.png with dissolve
-    play music "audio/ambient_horror.ogg" loop volume 0.6
+    scene bg escalera_bajando with dissolve
+    # play music "audio/ambient_horror.ogg" loop volume 0.6  # (Audio file is 0 bytes)
 
     narrador "El edificio cruje. Algo cambia en el aire."
     narrador "INFINIT-0 te habla desde todas las paredes a la vez."

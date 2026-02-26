@@ -10,6 +10,15 @@
 # Blanco sucio: #e0e0e0
 # Gris apagado: #7a7a7a
 
+# --- ANIMACIÓN DE CURSOR TIPO TERMINAL ---
+image ctc_blink:
+    Text(" _", font="fonts/vt323.ttf", size=28, color="#00ffff")
+    alpha 1.0
+    0.4
+    alpha 0.0
+    0.4
+    repeat
+
 # --- ALEX MORA (Jugador) ---
 define alex = Character(
     "ALEX",
@@ -29,7 +38,10 @@ define infinit = Character(
     what_color="#00e5ff",
     who_outlines=[(2, "#000000", 0, 0)],
     what_italic=True,
-    what_suffix=" _",
+    what_prefix="{cps=25}",
+    what_suffix="{/cps}",
+    ctc="ctc_blink",
+    ctc_position="nestled",
 )
 
 # --- DANTE RIVAS ---
@@ -48,6 +60,10 @@ define dante_inf = Character(
     who_bold=True,
     what_color="#b2ebf2",
     what_italic=True,
+    what_prefix="{cps=25}",
+    what_suffix="{/cps}",
+    ctc="ctc_blink",
+    ctc_position="nestled",
 )
 
 # --- VALENTINA MORA ---
@@ -61,7 +77,7 @@ define valentina = Character(
 
 # --- EL ESPEJO (Sujeto #77) ---
 define espejo = Character(
-    "[ ESPEJO ]",
+    "[[ ESPEJO ]",
     color="#b0bec5",
     who_bold=True,
     what_color="#cfd8dc",
@@ -80,7 +96,7 @@ define sujeto01 = Character(
 
 # --- DRA. CAMILA VOSS (grabaciones, diario) ---
 define voss = Character(
-    "Dra. CAMILA VOSS — [grabación 1987]",
+    "Dra. CAMILA VOSS — [[grabación 1987]",
     color="#ffe082",
     who_bold=True,
     what_color="#fff9c4",
@@ -92,10 +108,12 @@ define terminal = Character(
     None,
     color="#00ffff",
     what_color="#00ffff",
-    what_prefix="> ",
-    what_suffix="",
+    what_prefix="{cps=35}> ",
+    what_suffix="{/cps}",
     what_font="fonts/vt323.ttf",
     what_size=28,
+    ctc="ctc_blink",
+    ctc_position="nestled",
 )
 
 define narrador = Character(

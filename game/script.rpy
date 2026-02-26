@@ -14,11 +14,62 @@ default sujeto01_confiado = False  # Confía en el Sujeto #01
 default herido = False             # Alex está herido/a
 default camino_rebelde = False     # Tomó el camino del rebelde (Cap 1B)
 default veces_jugadas = 0         # Cuántas veces jugó (meta-narración)
-
 ## ─────────────────────────────────────────────
 ## INICIO
 ## ─────────────────────────────────────────────
+label main_menu:
+    call screen main_menu
+    return
+
+init python:
+    import datetime
+    import random
+
+    # Función que devuelve el texto distorsionado de login. Cambia de 1998 a Hoy.
+    def get_glitch_login_text(st, at):
+        current_time = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+        # Un 8% de probabilidad de mostrar la fecha actual real en cada tic (cada ~0.1s de reloj)
+        if random.random() < 0.08:
+            text = Text("LAST LOGIN: " + current_time, color="#ff4444", font="fonts/vt323.ttf", size=32)
+        else:
+            text = Text("LAST LOGIN: 14/08/1998 02:17:00", color="#00e5ff", font="fonts/vt323.ttf", size=32)
+        
+        return text, 0.1
+
+image dynamic_login_text = DynamicDisplayable(get_glitch_login_text)
+
+# LA SALA DEL SERVIDOR: COMPOSICIÓN DINÁMICA DE BACKGROUND MÁS BRANDING
+image bg sala_terminal:
+    # 1. Creamos un espacio mayor para hacer panning (1920 -> 2100)
+    contains:
+        Transform("images/bg/sala_terminal.png", size=(2100, 1180))
+        # Efecto de respiración LENTO (movimiento sutil de cámara)
+        xpos -100 ypos -50
+        linear 10.0 xpos 0 ypos 0
+        linear 10.0 xpos -100 ypos -50
+        repeat
+
+    # 2. El Brand del Antagonista pegado a la pared
+    contains:
+        "images/infinit_logo.png"
+        zoom 0.4
+        alpha 0.3
+        xalign 0.8 ypos 200
+        # Ligero parpadeo del logo
+        linear 3.0 alpha 0.4
+        linear 3.0 alpha 0.2
+        repeat
+
+    # 3. El texto críptico flotando en la escena como si fuera de un monitor
+    contains:
+        "dynamic_login_text"
+        xpos 80 ypos 80
+        # Efecto de viñeta fosforescente
+        blur 1.0
+
+
 label start:
+    $ _game_menu_screen = "preferences"
     $ veces_jugadas += 1
     call infinit_boot_sequence
     jump prologo
@@ -27,9 +78,9 @@ label start:
 ## PRÓLOGO (≈15 minutos lectura)
 ## ─────────────────────────────────────────────
 label prologo:
-    scene images/bg/exterior_orculo.png with dissolve
+    scene bg exterior_orculo with dissolve
     show screen crt_overlay
-    play music "audio/ambient_exterior.ogg" loop volume 0.5
+    # play music "audio/ambient_exterior.ogg" loop volume 0.5  # (Audio file is 0 bytes)
 
     narrador "Las 2:17 de la mañana. Suburbios de Buenos Aires."
     narrador "El edificio ORÁCULO lleva décadas abandonado. Nadie entra. Nadie sale."
@@ -38,12 +89,12 @@ label prologo:
     narrador "Y sin embargo, acá estás."
 
     with dissolve
-    scene images/bg/entrada_orculo.png with dissolve
+    scene bg entrada_orculo with dissolve
 
     narrador "La puerta principal cedió sin resistencia, como si te estuviera esperando."
     narrador "Apenas pusiste un pie adentro..."
 
-    play sound "audio/door_slam.ogg"
+    # play sound "audio/door_slam.ogg"  # (Audio file is 0 bytes)
     with hpunch
 
     narrador "...la puerta se cerró de golpe detrás de vos."
@@ -55,19 +106,19 @@ label prologo:
     pause 0.5
 
     ## Terminal enciende
-    play sound "audio/static_burst.ogg"
+    # play sound "audio/static_burst.ogg"  # (Audio file is 0 bytes)
     with flash
 
-    scene images/bg/sala_terminal.png with dissolve
+    scene bg sala_terminal with dissolve
     narrador "En el extremo del pasillo, una pantalla parpadea."
 
     call terminal_prologue_choice
 
     ## Elección SI / NO
     menu terminal_si_no:
-        "[ SÍ ]":
+        "[[ SÍ ]":
             jump prologo_acepta_terminal
-        "[ NO ]":
+        "[[ NO ]":
             jump prologo_rechaza_terminal
 
 ## ─────────────────────────────────────────
@@ -76,19 +127,12 @@ label prologo:
 label prologo_rechaza_terminal:
     narrador "Retrocedés. No vas a seguirle el juego a una pantalla."
 
-    play sound "audio/typing_fast.ogg"
-    show text "> Sabía que ibas a decir eso.":
-        xpos 80 ypos 200
-        color "#00ffff" font "fonts/vt323.ttf" size 30
-
+    # play sound "audio/typing_fast.ogg"  # (Audio file is 0 bytes)
+    show text Text("{cps=35}> Sabía que ibas a decir eso.{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=30)
     pause 1.2
     hide text
 
-    show text "> Igual vamos a jugar.":
-        xpos 80 ypos 240
-        color "#cc0000" font "fonts/vt323.ttf" size 32
-        at glitch_anim
-
+    show text Text("{cps=35}> Igual vamos a jugar.{/cps}{image=ctc_blink}", color="#cc0000", font="fonts/vt323.ttf", size=32) at glitch_anim
     pause 1.5
     hide text
 
@@ -106,9 +150,9 @@ label prologo_acepta_terminal:
 ## PRÓLOGO: INFINIT-0 se presenta
 ## ─────────────────────────────────────────
 label prologo_infinit_habla:
-    scene images/bg/sala_terminal.png with dissolve
+    scene bg sala_terminal with dissolve
     show screen crt_overlay
-    play music "audio/ambient_horror.ogg" loop volume 0.6
+    # play music "audio/ambient_horror.ogg" loop volume 0.6  # (Audio file is 0 bytes)
 
     ## Meta-narración si ya jugó antes
     if veces_jugadas > 1:
@@ -149,32 +193,19 @@ label prologo_infinit_habla:
     scene black with dissolve
     show screen crt_overlay
 
-    show text "NULL>ZONE":
-        xalign 0.5 yalign 0.45
-        color "#00ffff"
-        font "fonts/vt323.ttf"
-        size 140
-        outlines [(6, "#003333", 3, 3)]
-        at glitch_anim
-
+    show text Text("NULL>ZONE", color="#00ffff", font="fonts/vt323.ttf", size=140, outlines=[(6, "#003333", 3, 3)]) at glitch_anim
     pause 2.5
     hide text
 
-    show text "Tu decisión importa. O tal vez no.":
-        xalign 0.5 yalign 0.56
-        color "#336666"
-        font "fonts/vt323.ttf"
-        size 36
-        at fade_in_slow
-
+    show text Text("Tu decisión importa. O tal vez no.", color="#336666", font="fonts/vt323.ttf", size=36) at fade_in_slow
     pause 2.0
     hide text
 
     with dissolve
 
     ## Volver al edificio
-    scene images/bg/pasillo_largo.png with dissolve
-    play music "audio/ambient_horror.ogg" loop volume 0.5
+    scene bg pasillo_largo with dissolve
+    # play music "audio/ambient_horror.ogg" loop volume 0.5  # (Audio file is 0 bytes)
 
     infinit "La primera elección ya la tomaste: estás acá."
     infinit "Ahora... ¿qué hacés con la terminal que tenés enfrente?"
@@ -185,26 +216,25 @@ label prologo_infinit_habla:
     narrador "La terminal sigue encendida. Muestra un prompt parpadeante."
     narrador "Podés interactuar con ella o ignorarla e intentar buscar la salida."
 
-    show screen timer_warning(seconds_left=30)
-    $ timer_choice = "nada"
+    # Llama a la pantalla de timer, se le pasa el tiempo y a dónde saltar si se acaba
+    show screen timer_warning(time_limit=30, timeout_label="prologo_timeout")
 
-    python:
-        import time
-        start_time = time.time()
-
-    ## La decisión con timeout
+    ## La decisión
     menu decision_p1:
-        "[ INTERACTUAR con la terminal ]":
-            $ camino_rebelde = False
+        "[[ INTERACTUAR con la terminal ]":
             hide screen timer_warning
+            $ camino_rebelde = False
             jump capitulo1a_inicio
 
-        "[ IGNORAR la terminal y buscar la salida ]":
-            $ camino_rebelde = True
+        "[[ IGNORAR la terminal y buscar la salida ]":
             hide screen timer_warning
+            $ camino_rebelde = True
             jump capitulo1b_inicio
 
-    ## Si no eligió (timeout manual — en Ren'Py real usarías timer())
+## ─────────────────────────────────────────
+## PRÓLOGO: Timeout (INFINIT-0 elige)
+## ─────────────────────────────────────────
+label prologo_timeout:
     hide screen timer_warning
     call infinit_chooses
     ## Por defecto, si no elige: INFINIT-0 elige el peor camino
