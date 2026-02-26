@@ -1,0 +1,23 @@
+# Ren'Py cache y compilados
+game/cache/
+game/saves/
+game/log.txt
+game/errors.txt
+game/traceback.txt
+*.rpyc
+*.rpymc
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Distribuciones compiladas
+/dist/
+
+# Assets grandes (agregar manualmente)
+# game/audio/
+# game/images/
+
+# IDE
+.vscode/
+.idea/
