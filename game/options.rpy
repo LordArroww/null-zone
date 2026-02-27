@@ -71,3 +71,41 @@ define config.has_quicksave = True
 
 ## Voice
 define config.has_voice = False
+
+## =============================================
+## BUILD SETTINGS (SECURITY & LAUNCHER)
+## =============================================
+init python:
+    
+    # Nombre del ejecutable (.exe / .app / .sh)
+    build.directory_name = "NULL_ZONE-1.0.1"
+    build.executable_name = "NULL_ZONE"
+    
+    # Archivos a ignorar o no incluir
+    build.classify('**~', None)
+    build.classify('**.bak', None)
+    build.classify('**/.**', None)
+    build.classify('**/#**', None)
+    build.classify('**/thumbs.db', None)
+    
+    # ENCRIPTACIÓN / PROTECCIÓN (Anti-Theft de Basecode)
+    # Convertir todo en archivos .rpa ofuscados en lugar de carpetas abiertas
+    build.archive('archive', 'all')
+    
+    # Meter el código (rpyc compilado) en archive.rpa
+    build.classify('game/**.rpy', None)       # No empaquetar código fuente legible
+    build.classify('game/**.rpyc', 'archive') # Solo los compilados van al archive
+    
+    # Meter imágenes, audio y fuentes en archive.rpa para que nadie las robe
+    build.classify('game/**.png', 'archive')
+    build.classify('game/**.jpg', 'archive')
+    build.classify('game/**.webp', 'archive')
+    build.classify('game/**.ogg', 'archive')
+    build.classify('game/**.mp3', 'archive')
+    build.classify('game/**.wav', 'archive')
+    build.classify('game/**.ttf', 'archive')
+    build.classify('game/**.otf', 'archive')
+    
+    # Lo demás, si es de Ren'Py, que vaya all (carpetas base)
+    build.classify('game/**.rpa', 'all')
+    build.classify('game/**', 'all')

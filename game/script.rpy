@@ -69,6 +69,56 @@ image bg sala_terminal:
         blur 1.0
 
 
+default persistent.beta_unlocked = False
+
+## ─────────────────────────────────────────────
+## LAUNCHER BETA ANTI-PIRATEO (SPLASHSCREEN)
+## ─────────────────────────────────────────────
+label splashscreen:
+    if persistent.beta_unlocked:
+        return
+
+    scene black
+    show screen crt_overlay
+    
+    show text Text(">>> INICIANDO PROTOCOLO DE CONEXIÓN BETA <<<", color="#00ffff", font="fonts/vt323.ttf", size=40) at truecenter
+    pause 2.0
+    hide text
+    
+    $ attempts = 0
+    
+    label beta_login_loop:
+        $ beta_code = renpy.input("INGRESE CÓDIGO DE ACCESO BETA (Único Uso):", length=20).strip().upper()
+        
+        # En una beta real offline, la única forma de "un solo uso" es validarlo con un ID, 
+        # pero como no tenemos backend, validamos una master list o master key:
+        if beta_code == "NULL2026" or beta_code == "TESTER-ZERO":
+            $ persistent.beta_unlocked = True
+            show text Text("ACCESO CONCEDIDO. BIENVENIDO/A.", color="#00ff00", font="fonts/vt323.ttf", size=40) at truecenter
+            pause 2.0
+            hide text
+            return
+        else:
+            $ attempts += 1
+            if attempts >= 3:
+                show text Text("ACCESO DENEGADO.\nINTENTO DE DISTRIBUCIÓN ILEGAL DETECTADO.", color="#ff0000", font="fonts/vt323.ttf", size=40) at truecenter, glitch_anim
+                pause 2.5
+                hide text
+                
+                # Efecto glitch asustadizo infinito
+                with flash
+                show text Text("¿PENSABAS QUE PODÍAS ENGAÑAR A INFINIT-0?", color="#cc0000", font="fonts/vt323.ttf", size=80) at truecenter, glitch_anim
+                pause 2.0
+                show text Text("TU TERMINAL AHORA ME PERTENECE.", color="#ff4444", font="fonts/vt323.ttf", size=60) at truecenter
+                pause 2.0
+                
+                $ renpy.quit()
+            else:
+                show text Text("CÓDIGO INVÁLIDO O YA UTILIZADO.", color="#ff0000", font="fonts/vt323.ttf", size=40) at truecenter
+                pause 1.0
+                hide text
+                jump beta_login_loop
+
 label start:
     $ _game_menu_screen = "preferences"
     $ veces_jugadas += 1
