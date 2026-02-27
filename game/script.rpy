@@ -50,16 +50,7 @@ image bg sala_terminal:
         linear 10.0 xpos -100 ypos -50
         repeat
 
-    # 2. El Brand del Antagonista pegado a la pared
-    contains:
-        "images/infinit_logo.png"
-        zoom 0.4
-        alpha 0.3
-        xalign 0.8 ypos 200
-        # Ligero parpadeo del logo
-        linear 3.0 alpha 0.4
-        linear 3.0 alpha 0.2
-        repeat
+
 
     # 3. El texto críptico flotando en la escena como si fuera de un monitor
     contains:
