@@ -100,15 +100,21 @@ label splashscreen:
             #     valid_login = True
             
             import json
+            import ssl
             from urllib import request as urllib_request, error as urllib_error
             
             url = "https://null-zone-backend.santiferreri14.workers.dev"
             data = json.dumps({"code": beta_code}).encode('utf-8')
             req = urllib_request.Request(url, data=data, headers={'Content-Type': 'application/json'})
             
+            # Desactivar la verificación SSL estricta por problemas de CA root en el motor Ren'Py local para MacOS
+            ctx = ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = ssl.CERT_NONE
+            
             try:
                 # Timeout de 5s para que no se cuelgue infinito si no hay internet
-                response = urllib_request.urlopen(req, timeout=5.0)
+                response = urllib_request.urlopen(req, timeout=5.0, context=ctx)
                 if response.getcode() == 200:
                     valid_login = True
             except urllib_error.HTTPError as e:

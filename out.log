@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "lib/python3.12/urllib/request.py", line 1344, in do_open
+  File "lib/python3.12/http/client.py", line 1336, in request
+  File "lib/python3.12/http/client.py", line 1382, in _send_request
+  File "lib/python3.12/http/client.py", line 1331, in endheaders
+  File "lib/python3.12/http/client.py", line 1091, in _send_output
+  File "lib/python3.12/http/client.py", line 1035, in send
+  File "lib/python3.12/http/client.py", line 1477, in connect
+  File "lib/python3.12/ssl.py", line 452, in wrap_socket
+  File "lib/python3.12/ssl.py", line 1036, in _create
+  File "lib/python3.12/ssl.py", line 1314, in do_handshake
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/santiago/Desktop/cursor/null_zone/test_req.py", line 9, in <module>
+    res = urllib.request.urlopen(req, timeout=5)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "lib/python3.12/urllib/request.py", line 215, in urlopen
+  File "lib/python3.12/urllib/request.py", line 515, in open
+  File "lib/python3.12/urllib/request.py", line 532, in _open
+  File "lib/python3.12/urllib/request.py", line 492, in _call_chain
+  File "lib/python3.12/urllib/request.py", line 1392, in https_open
+  File "lib/python3.12/urllib/request.py", line 1347, in do_open
+urllib.error.URLError: <urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1000)>
