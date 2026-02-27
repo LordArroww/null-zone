@@ -36,15 +36,65 @@ init python:
             text = Text(glitch_chars, color="#ffffff", font="fonts/vt323.ttf", size=32)
             return text, random.uniform(0.05, 0.15)
             
-        # 8% de probabilidad de mostrar la fecha actual y mantenerla por más tiempo
         elif random.random() < 0.08:
             text = Text("LAST LOGIN: " + current_time, color="#ff4444", font="fonts/vt323.ttf", size=32)
-            # Se queda en pantalla entre 0.8 y 2.0 segundos
             return text, random.uniform(0.8, 2.0)
             
         else:
             text = Text("LAST LOGIN: 14/08/1998 02:17:00", color="#00e5ff", font="fonts/vt323.ttf", size=32)
             return text, 0.1
+
+    def check_beta_code(code):
+        import json
+        import ssl
+        import traceback
+        from urllib import request as urllib_request, error as urllib_error
+
+        log_path = "/tmp/beta_login_debug.txt"
+
+        def write_log(msg):
+            with open(log_path, "a") as f:
+                f.write(msg + "\n")
+
+        write_log("=== check_beta_code called with: '" + str(code) + "' ===")
+
+        url = "https://null-zone-backend.santiferreri14.workers.dev"
+        data = json.dumps({"code": code}).encode('utf-8')
+        req = urllib_request.Request(url, data=data, headers={
+            'Content-Type': 'application/json',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36',
+            'Accept': 'application/json',
+        })
+
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+
+        try:
+            response = urllib_request.urlopen(req, timeout=6.0, context=ctx)
+            status = response.getcode()
+            write_log("HTTP response code: " + str(status))
+            if status == 200:
+                write_log("Returning: ok")
+                return 'ok'
+            write_log("Returning: error (non-200 success)")
+            return 'error'
+        except urllib_error.HTTPError as e:
+            body = ""
+            try:
+                body = e.read(512).decode('utf-8', errors='replace')
+            except Exception:
+                pass
+            write_log("HTTPError code: " + str(e.code) + " body: " + body)
+            if e.code == 403:
+                write_log("Returning: used")
+                return 'used'
+            write_log("Returning: invalid")
+            return 'invalid'
+        except Exception as ex:
+            write_log("Exception: " + traceback.format_exc())
+            write_log("Returning: error")
+            return 'error'
 
 image dynamic_login_text = DynamicDisplayable(get_glitch_login_text)
 
@@ -88,62 +138,29 @@ label splashscreen:
     $ attempts = 0
     
     label beta_login_loop:
-        $ beta_code = renpy.input("INGRESE CÓDIGO DE ACCESO BETA (Único Uso):", length=20).strip().upper()
+        $ beta_code = renpy.input("INGRESE CODIGO DE ACCESO BETA:", length=20).strip().upper()
         
-        python:
-            valid_login = False
-            already_used = False
-            connection_error = False
-            
-            # Fallback provisorio para testear offline o debug (descomentar luego si se desea forzar off)
-            # if beta_code == "DEV-BYPASS":
-            #     valid_login = True
-            
-            import json
-            import ssl
-            from urllib import request as urllib_request, error as urllib_error
-            
-            url = "https://null-zone-backend.santiferreri14.workers.dev"
-            data = json.dumps({"code": beta_code}).encode('utf-8')
-            req = urllib_request.Request(url, data=data, headers={'Content-Type': 'application/json'})
-            
-            # Desactivar la verificación SSL estricta por problemas de CA root en el motor Ren'Py local para MacOS
-            ctx = ssl.create_default_context()
-            ctx.check_hostname = False
-            ctx.verify_mode = ssl.CERT_NONE
-            
-            try:
-                # Timeout de 5s para que no se cuelgue infinito si no hay internet
-                response = urllib_request.urlopen(req, timeout=5.0, context=ctx)
-                if response.getcode() == 200:
-                    valid_login = True
-            except urllib_error.HTTPError as e:
-                if e.code == 403:
-                    already_used = True
-                # Si 400 o 404 -> invalido natural
-            except Exception as e:
-                connection_error = True
+        # Llamar la función Python pura que hace el request y devuelve un string claro
+        $ beta_result = check_beta_code(beta_code)
 
-        if connection_error:
-            show text Text("ERROR: NO SE PUDO CONECTAR CON EL SERVIDOR DE INFINIT.", color="#ffaa00", font="fonts/vt323.ttf", size=40) at truecenter
-            pause 2.0
-            hide text
-            jump beta_login_loop
-
-        if valid_login:
+        if beta_result == 'ok':
             $ persistent.beta_unlocked = True
             show text Text("ACCESO CONCEDIDO. BIENVENIDO/A.", color="#00ff00", font="fonts/vt323.ttf", size=40) at truecenter
             pause 2.0
             hide text
             return
-        elif already_used:
-            show text Text("ACCESO DENEGADO.\nEL CÓDIGO YA FUE UTILIZADO EN OTRA TERMINAL.", color="#ff0000", font="fonts/vt323.ttf", size=40) at truecenter, glitch_anim
+        elif beta_result == 'used':
+            show text Text("ACCESO DENEGADO. CODIGO YA UTILIZADO EN OTRA TERMINAL.", color="#ff0000", font="fonts/vt323.ttf", size=40) at truecenter, glitch_anim
             pause 2.5
             hide text
-            # Lo contamos como strike de piratería
             $ attempts += 1
-        else:
-            show text Text("CÓDIGO INVÁLIDO O INEXISTENTE.", color="#ff0000", font="fonts/vt323.ttf", size=40) at truecenter
+        elif beta_result == 'error':
+            show text Text("ERROR: SIN CONEXION CON EL SERVIDOR INFINIT.", color="#ffaa00", font="fonts/vt323.ttf", size=40) at truecenter
+            pause 2.0
+            hide text
+            jump beta_login_loop
+        else:  # 'invalid'
+            show text Text("CODIGO INVALIDO O INEXISTENTE.", color="#ff0000", font="fonts/vt323.ttf", size=40) at truecenter
             pause 1.0
             hide text
             $ attempts += 1
