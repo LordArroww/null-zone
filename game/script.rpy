@@ -29,13 +29,22 @@ init python:
     # Función que devuelve el texto distorsionado de login. Cambia de 1998 a Hoy.
     def get_glitch_login_text(st, at):
         current_time = datetime.datetime.now().strftime("%d/%m/%Y %H:%M:%S")
-        # Un 8% de probabilidad de mostrar la fecha actual real en cada tic (cada ~0.1s de reloj)
-        if random.random() < 0.08:
+        
+        # 5% de probabilidad de mostrar basura / frame corrupto rápido
+        if random.random() < 0.05:
+            glitch_chars = "".join(random.choice("!@#$%^&*()_+|~-=\\`{}[]:\";'<>?,./") for _ in range(25))
+            text = Text(glitch_chars, color="#ffffff", font="fonts/vt323.ttf", size=32)
+            return text, random.uniform(0.05, 0.15)
+            
+        # 8% de probabilidad de mostrar la fecha actual y mantenerla por más tiempo
+        elif random.random() < 0.08:
             text = Text("LAST LOGIN: " + current_time, color="#ff4444", font="fonts/vt323.ttf", size=32)
+            # Se queda en pantalla entre 0.8 y 2.0 segundos
+            return text, random.uniform(0.8, 2.0)
+            
         else:
             text = Text("LAST LOGIN: 14/08/1998 02:17:00", color="#00e5ff", font="fonts/vt323.ttf", size=32)
-        
-        return text, 0.1
+            return text, 0.1
 
 image dynamic_login_text = DynamicDisplayable(get_glitch_login_text)
 
