@@ -6,6 +6,9 @@ init python:
     # Traducciones nativas de los prompts de salir / volver al menú
     config.translations["Are you sure you want to quit?"] = "¿ESTÁS SEGURO QUE QUERÉS SALIR?"
     config.translations["Are you sure you want to return to the main menu?\nThis will lose unsaved progress."] = "¿VOLVER AL MENÚ PRINCIPAL?\n(SE PERDERÁ TODO EL PROGRESO)"
+    config.translations["Are you sure you want to return to the main menu?\nThis will lose unsaved progress."] = "¿VOLVER AL MENÚ PRINCIPAL?\n(SE PERDERÁ TODO EL PROGRESO)"
+    # Para asegurar compatibilidad con el fallback de gui
+    gui.MAIN_MENU = "¿VOLVER AL MENÚ PRINCIPAL?\n(SE PERDERÁ TODO EL PROGRESO)"
 
 screen navigation():
     hbox:
