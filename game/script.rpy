@@ -47,16 +47,7 @@ init python:
     def check_beta_code(code):
         import json
         import ssl
-        import traceback
         from urllib import request as urllib_request, error as urllib_error
-
-        log_path = "/tmp/beta_login_debug.txt"
-
-        def write_log(msg):
-            with open(log_path, "a") as f:
-                f.write(msg + "\n")
-
-        write_log("=== check_beta_code called with: '" + str(code) + "' ===")
 
         url = "https://null-zone-backend.santiferreri14.workers.dev"
         data = json.dumps({"code": code}).encode('utf-8')
@@ -72,28 +63,14 @@ init python:
 
         try:
             response = urllib_request.urlopen(req, timeout=6.0, context=ctx)
-            status = response.getcode()
-            write_log("HTTP response code: " + str(status))
-            if status == 200:
-                write_log("Returning: ok")
+            if response.getcode() == 200:
                 return 'ok'
-            write_log("Returning: error (non-200 success)")
             return 'error'
         except urllib_error.HTTPError as e:
-            body = ""
-            try:
-                body = e.read(512).decode('utf-8', errors='replace')
-            except Exception:
-                pass
-            write_log("HTTPError code: " + str(e.code) + " body: " + body)
             if e.code == 403:
-                write_log("Returning: used")
                 return 'used'
-            write_log("Returning: invalid")
             return 'invalid'
-        except Exception as ex:
-            write_log("Exception: " + traceback.format_exc())
-            write_log("Returning: error")
+        except Exception:
             return 'error'
 
 image dynamic_login_text = DynamicDisplayable(get_glitch_login_text)
