@@ -80,8 +80,8 @@ screen preferences():
             hbox:
                 xalign 0.5
                 spacing 20
-                textbutton "[-]" action Preference("music volume", 0.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#00ffff"
-                textbutton "[+]" action Preference("music volume", 1.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#ff0044"
+                textbutton "[[-]]" action Preference("music volume", 0.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#00ffff"
+                textbutton "[[+]]" action Preference("music volume", 1.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#ff0044"
 
             null height 20
             
@@ -89,8 +89,8 @@ screen preferences():
             hbox:
                 xalign 0.5
                 spacing 20
-                textbutton "[-]" action Preference("sound volume", 0.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#00ffff"
-                textbutton "[+]" action Preference("sound volume", 1.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#ff0044"
+                textbutton "[[-]]" action Preference("sound volume", 0.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#00ffff"
+                textbutton "[[+]]" action Preference("sound volume", 1.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#ff0044"
 
         vbox:
             spacing 20
