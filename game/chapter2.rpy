@@ -400,7 +400,7 @@ label camino_comprension:
     # play music "audio/ambient_memories.ogg" loop volume 0.5  # (Audio file is 0 bytes)
 
     narrador "Sujeto #001 — Martín Álvarez. 34 años. Ingeniero. Tenía dos hijos."
-    narrador "Entró porque su empresa trabajaba con ORÁCULO Systems. Lo enviaron sin decirle qué era."
+    narrador "Entró porque su empresa trabajaba con INFINIT Systems. Lo enviaron sin decirle qué era."
     narrador "Su último recuerdo antes de la integración: la foto de sus hijos en su billetera."
 
     pause 1.0

@@ -14,6 +14,7 @@ default sujeto01_confiado = False  # Confía en el Sujeto #01
 default herido = False             # Alex está herido/a
 default camino_rebelde = False     # Tomó el camino del rebelde (Cap 1B)
 default veces_jugadas = 0         # Cuántas veces jugó (meta-narración)
+
 ## ─────────────────────────────────────────────
 ## INICIO
 ## ─────────────────────────────────────────────
@@ -78,18 +79,18 @@ label start:
 ## PRÓLOGO (≈15 minutos lectura)
 ## ─────────────────────────────────────────────
 label prologo:
-    scene bg exterior_orculo with dissolve
+    scene bg exterior_infinit with dissolve
     show screen crt_overlay
     # play music "audio/ambient_exterior.ogg" loop volume 0.5  # (Audio file is 0 bytes)
 
     narrador "Las 2:17 de la mañana. Suburbios de Buenos Aires."
-    narrador "El edificio ORÁCULO lleva décadas abandonado. Nadie entra. Nadie sale."
+    narrador "El edificio INFINIT lleva décadas abandonado. Nadie entra. Nadie sale."
     narrador "Dante Rivas entró hace tres días. Era tu mejor amigo. Él nunca haría algo así sin avisarte."
     pause 0.3
     narrador "Y sin embargo, acá estás."
 
     with dissolve
-    scene bg entrada_orculo with dissolve
+    scene bg entrada_infinit with dissolve
 
     narrador "La puerta principal cedió sin resistencia, como si te estuviera esperando."
     narrador "Apenas pusiste un pie adentro..."
@@ -128,11 +129,11 @@ label prologo_rechaza_terminal:
     narrador "Retrocedés. No vas a seguirle el juego a una pantalla."
 
     # play sound "audio/typing_fast.ogg"  # (Audio file is 0 bytes)
-    show text Text("{cps=35}> Sabía que ibas a decir eso.{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=30)
+    show text Text("> Sabía que ibas a decir eso.", color="#00ffff", font="fonts/vt323.ttf", size=30)
     pause 1.2
     hide text
 
-    show text Text("{cps=35}> Igual vamos a jugar.{/cps}{image=ctc_blink}", color="#cc0000", font="fonts/vt323.ttf", size=32) at glitch_anim
+    show text Text("> Igual vamos a jugar.", color="#cc0000", font="fonts/vt323.ttf", size=32) at glitch_anim
     pause 1.5
     hide text
 

@@ -15,11 +15,11 @@ define config.window_icon = None
 ## DEFINICIONES DE IMÁGENES (BACKGROUNDS)
 ## ─────────────────────────────────────────────
 image bg cuarto_central = Transform("images/bg/cuarto_central.png", size=(1920, 1080))
-image bg entrada_orculo = Transform("images/bg/entrada_orculo.png", size=(1920, 1080))
+image bg entrada_infinit = Transform("images/bg/entrada_infinit.png", size=(1920, 1080))
 image bg escalera_bajando = Transform("images/bg/escalera_bajando.png", size=(1920, 1080))
 image bg exterior_amanecer = Transform("images/bg/exterior_amanecer.png", size=(1920, 1080))
 image bg exterior_noche = Transform("images/bg/exterior_noche.png", size=(1920, 1080))
-image bg exterior_orculo = Transform("images/bg/exterior_orculo.png", size=(1920, 1080))
+image bg exterior_infinit = Transform("images/bg/exterior_infinit.png", size=(1920, 1080))
 image bg hospital_room = Transform("images/bg/hospital_room.png", size=(1920, 1080))
 image bg menu_bg = Transform("images/bg/menu_bg.png", size=(1920, 1080))
 image bg pasillo_colapsando = Transform("images/bg/pasillo_colapsando.png", size=(1920, 1080))

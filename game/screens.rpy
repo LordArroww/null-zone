@@ -115,7 +115,7 @@ screen main_menu():
             outlines [(4, "#003333", 2, 2)]
             at glitch_anim
 
-        text "Un juego de ORÁCULO Systems":
+        text "Un juego de INFINIT Systems":
             xalign 0.5
             color "#336666"
             font "fonts/vt323.ttf"

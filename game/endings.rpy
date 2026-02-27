@@ -37,7 +37,7 @@ label final_1:
     narrador "Dante... desaparecido."
 
     narrador "En el techo de la habitación, la pantalla del televisor muestra las noticias."
-    narrador "'El histórico edificio ORÁCULO Systems fue destruido por un incendio. Sin víctimas.'"
+    narrador "'El histórico edificio INFINIT Systems fue destruido por un incendio. Sin víctimas.'"
     narrador "Mentira interesada."
 
     narrador "Entonces... la pantalla del televisor parpadea."
@@ -285,9 +285,9 @@ label final_6:
 
     narrador "Epílogo. Un año después."
     narrador "Alex Mora, Dante Rivas y Valentina Mora salieron vivos."
-    narrador "Alex escribió un libro. 'NULL>ZONE: La Verdad sobre ORÁCULO Systems.'"
+    narrador "Alex escribió un libro. 'NULL>ZONE: La Verdad sobre INFINIT Systems.'"
     narrador "El libro vendió tres millones de copias en seis meses."
-    narrador "ORÁCULO Systems (sus herederos legales) demandaron a Alex por difamación."
+    narrador "INFINIT Systems (sus herederos legales) demandaron a Alex por difamación."
     narrador "El juicio duró tres años."
     narrador "Alex ganó."
     narrador "La historia llegó al mundo."
@@ -343,7 +343,7 @@ label final_7:
     narrador "Y en una de ellas..."
     narrador "Alex, parado frente a un servidor. Sonriendo."
     narrador "El fondo es inconfundible."
-    narrador "El interior del edificio ORÁCULO."
+    narrador "El interior del edificio INFINIT."
 
     narrador "¿Qué pasó en esos tres meses?"
     narrador "No tenés forma de saberlo."
@@ -602,7 +602,7 @@ label final_12:
     pause 0.5
     hide text
 
-    show text Text("{cps=35}> Historia escrita por:  ORÁCULO Systems / INFINIT-0{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=26)
+    show text Text("{cps=35}> Historia escrita por:  INFINIT Systems / INFINIT-0{/cps}{image=ctc_blink}", color="#00ffff", font="fonts/vt323.ttf", size=26)
     pause 0.5
     hide text
 
@@ -653,7 +653,7 @@ label creditos:
     pause 1.5
     hide text
 
-    show text Text("Una historia de ORÁCULO Systems", color="#336666", font="fonts/vt323.ttf", size=30)
+    show text Text("Una historia de INFINIT Systems", color="#336666", font="fonts/vt323.ttf", size=30)
     pause 1.0
     hide text
 
