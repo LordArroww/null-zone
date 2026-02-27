@@ -102,7 +102,7 @@ label splashscreen:
             import json
             from urllib import request as urllib_request, error as urllib_error
             
-            url = "https://null-zone-backend.tu-usuario.workers.dev" # TODO: Rellenar tras deploy
+            url = "https://null-zone-backend.santiferreri14.workers.dev"
             data = json.dumps({"code": beta_code}).encode('utf-8')
             req = urllib_request.Request(url, data=data, headers={'Content-Type': 'application/json'})
             
