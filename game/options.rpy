@@ -8,7 +8,7 @@ define gui.show_name = True
 
 define config.save_directory = "null_zone-1.0"
 
-define config.window_icon = None
+define config.window_icon = "gui/window_icon.png"
 # define config.main_menu_music = "audio/ambient_menu.ogg"  # Deshabilitado por ahora porque pesa 0 bytes
 
 ## ─────────────────────────────────────────────
