@@ -1,32 +1,33 @@
-2026-02-27 05:57:41 UTC
+2026-02-27 06:00:28 UTC
 macOS-26.2-arm64-arm-64bit
 Ren'Py 8.5.2.26010301
 
-Early init took 42 ms
-Loading error handling took 95 ms
-Loading script took 305 ms
-Loading save slot metadata took 37 ms
+Early init took 99 ms
+Loading error handling took 185 ms
+Loading script took 658 ms
+Loading save slot metadata took 81 ms
 Loading persistent took 0 ms
-Running init code took 266 ms
-Loading analysis data took 3 ms
-Analyze and compile ATL took 2 ms
-Reloading save slot metadata took 4 ms
+ - Init at renpy/common/00console.rpy:126 took 320 ms.
+Running init code took 612 ms
+Loading analysis data took 7 ms
+Analyze and compile ATL took 5 ms
+Reloading save slot metadata took 10 ms
 Backing up script files to '/Users/santiago/Library/RenPy/backups/null_zone':
-Dump and make backups took 1 ms
+Dump and make backups took 2 ms
 Cleaning cache took 0 ms
 Making clean stores took 0 ms
-Initial gc took 31 ms
+Initial gc took 78 ms
 DPI scale factor: 1.000000
 Creating interface object took 1 ms
 Init translation took 0 ms
 Cleaning stores took 0 ms
-Load screen analysis took 0 ms
-Analyze screens took 6 ms
-Save screen analysis took 9 ms
-Save pyanalysis took 3 ms
-Save bytecode took 24 ms
+Load screen analysis took 1 ms
+Analyze screens took 13 ms
+Save screen analysis took 16 ms
+Save pyanalysis took 0 ms
+Save bytecode took 34 ms
 Running _start took 1 ms
-Interface start took 613 ms
+Interface start took 1012 ms
 
 Initializing gl2 renderer:
 primary display bounds: (0, 0, 1470, 956)
@@ -40,83 +41,3 @@ Screen sizes: virtual=(1920, 1080) physical=(1470, 923) drawable=(2940, 1846)
 Maximum texture size: 4096x4096
 Screen sizes: virtual=(1920, 1080) physical=(1470, 923) drawable=(2940, 1846)
 Maximum texture size: 4096x4096
-
-Full traceback:
-  File "game/script.rpy", line 167, in script
-    infinit "Hola, Alex."
-  File "renpy/ast.py", line 2925, in execute
-    Say.execute(self)
-    ~~~~~~~~~~~^^^^^^
-  File "renpy/ast.py", line 991, in execute
-    renpy.exports.say(who, what, *args, **kwargs)
-    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/exports/sayexports.py", line 129, in say
-    who(what, *args, **kwargs)
-    ~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/character.py", line 1565, in __call__
-    self.do_display(who, what, cb_args=self.cb_args, dtt=dtt, **display_args)
-    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/character.py", line 1220, in do_display
-    display_say(who, what, self.do_show, **display_args)
-    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/character.py", line 902, in display_say
-    rv = renpy.ui.interact(mouse="say", type=type, roll_forward=roll_forward)
-         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/ui.py", line 306, in interact
-    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
-         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/display/core.py", line 2154, in interact
-    repeat, rv = self.interact_core(
-                 ~~~~~~~~~~~~~~~~~~^
-        preloads=preloads,
-        ^^^^^^^^^^^^^^^^^^
-    ...<4 lines>...
-        **kwargs,
-        ^^^^^^^^^
-    )
-    ^
-  File "renpy/display/core.py", line 2833, in interact_core
-    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/display/core.py", line 1279, in draw_screen
-    surftree = renpy.display.render.render_screen(
-               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
-        root_widget,
-        ^^^^^^^^^^^^
-        renpy.config.screen_width,
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^
-        renpy.config.screen_height,
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-    )
-    ^
-  File "renpy/display/render.pyx", line 494, in renpy.display.render.render_screen
-  File "renpy/display/render.pyx", line 267, in renpy.display.render.render
-  File "renpy/display/layout.py", line 896, in render
-    surf = render(child, width, height, cst, cat)
-           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/display/render.pyx", line 170, in renpy.display.render.render
-  File "renpy/display/render.pyx", line 267, in renpy.display.render.render
-  File "renpy/display/layout.py", line 896, in render
-    surf = render(child, width, height, cst, cat)
-           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/display/render.pyx", line 170, in renpy.display.render.render
-  File "renpy/display/render.pyx", line 267, in renpy.display.render.render
-  File "renpy/display/layout.py", line 896, in render
-    surf = render(child, width, height, cst, cat)
-           ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/display/render.pyx", line 170, in renpy.display.render.render
-  File "renpy/display/render.pyx", line 267, in renpy.display.render.render
-  File "renpy/display/transform.py", line 1077, in render
-    return RenderTransform(self).render(width, height, st, at)
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/display/accelerator.pyx", line 1020, in renpy.display.accelerator.RenderTransform.render
-  File "renpy/display/accelerator.pyx", line 439, in renpy.display.accelerator.RenderTransform.render_child
-  File "renpy/display/render.pyx", line 267, in renpy.display.render.render
-  File "renpy/display/image.py", line 532, in render
-    return wrap_render(self.target, width, height, st, at)
-           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/display/image.py", line 307, in wrap_render
-    rend = render(child, w, h, st, at)
-           ~~~~~~^^^^^^^^^^^^^^^^^^^^^
-  File "renpy/display/render.pyx", line 170, in renpy.display.render.render
-  File "renpy/display/render.pyx", line 267, in renpy.display.render.render

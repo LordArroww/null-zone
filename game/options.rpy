@@ -3,7 +3,7 @@
 ## =============================================
 
 define config.name = "NULL>ZONE"
-define config.version = "1.0.0"
+define config.version = "1.0.1"
 define gui.show_name = True
 
 define config.save_directory = "null_zone-1.0"
