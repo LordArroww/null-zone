@@ -149,6 +149,9 @@ screen file_slots(title):
 screen yesno_prompt(message, yes_action, no_action):
     modal True
     zorder 200
+
+    $ if "return to the main menu" in message: message = "¿VOLVER AL MENÚ PRINCIPAL?\n(SE PERDERÁ TODO EL PROGRESO)"
+    $ if "quit" in message: message = "¿ESTÁS SEGURO QUE QUERÉS SALIR?"
     
     add Solid("#000000") alpha 0.9
 
