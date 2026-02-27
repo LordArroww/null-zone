@@ -32,7 +32,7 @@ init python:
         
         # 5% de probabilidad de mostrar basura / frame corrupto rápido
         if random.random() < 0.05:
-            glitch_chars = "".join(random.choice("!@#$%^&*()_+|~-=\\`{}[]:\";'<>?,./") for _ in range(25))
+            glitch_chars = "".join(random.choice("!@#$%^&*()_+|~-=\\`:\";'<>?,./") for _ in range(25))
             text = Text(glitch_chars, color="#ffffff", font="fonts/vt323.ttf", size=32)
             return text, random.uniform(0.05, 0.15)
             
