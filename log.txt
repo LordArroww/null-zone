@@ -43,3 +43,7 @@ Cleaning stores took 0 ms
 Load screen analysis took 8 ms
 Analyze screens took 0 ms
 Running _start took 1 ms
+Cleaning stores took 0 ms
+Load screen analysis took 15 ms
+Analyze screens took 0 ms
+Running _start took 1 ms
