@@ -2,6 +2,11 @@
 ## MENÚS INTERNOS COMPLETOS - NULL>ZONE
 ## =============================================
 
+init python:
+    # Traducciones nativas de los prompts de salir / volver al menú
+    config.translations["Are you sure you want to quit?"] = "¿ESTÁS SEGURO QUE QUERÉS SALIR?"
+    config.translations["Are you sure you want to return to the main menu?\nThis will lose unsaved progress."] = "¿VOLVER AL MENÚ PRINCIPAL?\n(SE PERDERÁ TODO EL PROGRESO)"
+
 screen navigation():
     hbox:
         xalign 0.5
@@ -61,33 +66,44 @@ screen preferences():
     vbox:
         xalign 0.5
         ypos 100
-        text "[[ OPCIONES DEL SISTEMA ]]" color "#00ffff" font "fonts/vt323.ttf" size 60
+        text "[[ MODO DE SISTEMA ]]" color "#00ffff" font "fonts/vt323.ttf" size 60
 
     hbox:
         xalign 0.5
         ypos 300
         spacing 150
 
+        # Bloque de Volumen rediseñado para que no use las barras raras por defecto
         vbox:
             spacing 20
-            text "VOLUMEN MÚSICA" color "#00e5ff" font "fonts/vt323.ttf" size 30
-            bar value Preference("music volume") xsize 300
-            
+            text "VOLUMEN DE MÚSICA" color "#00e5ff" font "fonts/vt323.ttf" size 30 xalign 0.5
+            hbox:
+                xalign 0.5
+                spacing 20
+                textbutton "[-]" action Preference("music volume", 0.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#00ffff"
+                textbutton "[+]" action Preference("music volume", 1.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#ff0044"
+
             null height 20
             
-            text "VOLUMEN EFECTOS" color "#00e5ff" font "fonts/vt323.ttf" size 30
-            bar value Preference("sound volume") xsize 300
+            text "VOLUMEN DE RUIDOS" color "#00e5ff" font "fonts/vt323.ttf" size 30 xalign 0.5
+            hbox:
+                xalign 0.5
+                spacing 20
+                textbutton "[-]" action Preference("sound volume", 0.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#00ffff"
+                textbutton "[+]" action Preference("sound volume", 1.0) text_font "fonts/vt323.ttf" text_size 35 text_color "#ff0044"
 
         vbox:
             spacing 20
-            text "PANTALLA" color "#00e5ff" font "fonts/vt323.ttf" size 30
-            textbutton "[[ COMPLETA ]":
+            text "TAMAÑO DE PANTALLA" color "#00e5ff" font "fonts/vt323.ttf" size 30 xalign 0.5
+            textbutton "[[ MAXIMIZAR ]":
+                xalign 0.5
                 action Preference("display", "fullscreen")
                 text_font "fonts/vt323.ttf"
                 text_size 35
                 text_color "#00ffff"
                 text_hover_color "#ffffff"
             textbutton "[[ VENTANA ]":
+                xalign 0.5
                 action Preference("display", "window")
                 text_font "fonts/vt323.ttf"
                 text_size 35

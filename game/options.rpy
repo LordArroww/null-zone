@@ -16,6 +16,7 @@ define config.window_icon = None
 ## ─────────────────────────────────────────────
 image bg cuarto_central = Transform("images/bg/cuarto_central.png", size=(1920, 1080))
 image bg entrada_infinit = Transform("images/bg/entrada_infinit.png", size=(1920, 1080))
+image bg entrada_infinit_cerrada = Transform("images/bg/entrada_infinit_cerrada.png", size=(1920, 1080))
 image bg escalera_bajando = Transform("images/bg/escalera_bajando.png", size=(1920, 1080))
 image bg exterior_amanecer = Transform("images/bg/exterior_amanecer.png", size=(1920, 1080))
 image bg exterior_noche = Transform("images/bg/exterior_noche.png", size=(1920, 1080))

@@ -97,6 +97,8 @@ label prologo:
 
     # play sound "audio/door_slam.ogg"  # (Audio file is 0 bytes)
     with hpunch
+    
+    scene bg entrada_infinit_cerrada with dissolve
 
     narrador "...la puerta se cerró de golpe detrás de vos."
     alex "¿Dante? ¿Estás ahí?"

@@ -132,11 +132,6 @@ screen main_menu():
             action Start()
             style "main_menu_button"
 
-        textbutton "[[ CONTINUAR ]":
-            xalign 0.5
-            action ShowMenu("load")
-            style "main_menu_button"
-
         textbutton "[[ OPCIONES ]":
             xalign 0.5
             action ShowMenu("preferences")
